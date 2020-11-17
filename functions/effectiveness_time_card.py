@@ -1,4 +1,4 @@
-__arglist__ = {'選項(1,關數,時間 or 2,卡片數量,時間)': 'x', '時間': 'time', '關數/卡片數量': 'card'}
+__arglist__ = {'選項(1,關數,時間 or 2,卡片數量,時間)': 'x', '': 'card', '': 'time'}
 
 def __invoke__(arg):
 	Time = float(arg["time"])

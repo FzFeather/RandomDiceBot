@@ -27,7 +27,7 @@ def __invoke__(arg):
 				else:
 					level = (level-2)/3+58
 					print("你必須到達", level,"層",(i+1),"次")
-				else :
-					print("error")
-					if level <= 10:
-						break
+			else :
+				print("error")
+			if level <= 10:
+				break

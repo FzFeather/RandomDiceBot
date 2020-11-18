@@ -13,7 +13,7 @@ def __invoke__(arg):
 		level = math.ceil(math.ceil(Numberofcoinneeded/coins)*40/(i+1))
 		if level <= 56:
 			n = 0
-			while n=0:
+			while n==0:
 				if level%8 == 0:
 					level = level/8*5
 					n = 1

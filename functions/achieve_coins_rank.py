@@ -15,11 +15,11 @@ def __invoke__(arg):
 			if level%8 == 0:
 				level = level/8*5
 			elif level%4 == 0:
-				level = round(level/8*5)-2
+				level = round(level/8+0.01)*5-2
 			elif (level-1)%4 == 0:
-				level = round(level/8*5)-1
+				level = round(level/8+0.01)*5-1
 			else:
-				level = round(level/8*5)+level%8
+				level = round(level/8+0.01)*5+level%8
 		elif level > 56 :
 			level -= 56
 			if level%6 == 0:

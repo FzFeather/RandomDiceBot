@@ -13,7 +13,7 @@ def __invoke__(arg):
 		level = math.ceil(math.ceil(Numberofcoinneeded/coins)*40/(i+1))
 		if level <= 56:
 			n = 0
-			while (n=0) {
+			while n=0:
 				if level%8 == 0:
 					level = level/8*5
 					n = 1
@@ -23,9 +23,11 @@ def __invoke__(arg):
 				elif (level-1)%4 == 0:
 					level = round(level/8+0.01)*5-1
 					n = 1
+				elif (level-2)%8 == 0:
+					level = round(level/8)*5+2
+					n = 1
 				else:
 					level += 1
-			}
 		elif level > 56 :
 			level -= 56
 			if level%6 == 0:

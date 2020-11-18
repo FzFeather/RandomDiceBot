@@ -23,9 +23,9 @@ def __invoke__(arg):
 		elif level > 56 :
 			level -= 56
 			if level%6 == 0:
-				level = level/3+56
+				level = level*3+56
 			else:
-				level = (level-2)/3+58
+				level = (level-2)*3+58
 		print("你必須到達", level,"層",(i+1),"次")
 		if level <= 10:
 			break

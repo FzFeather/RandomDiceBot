@@ -30,7 +30,7 @@ def __invoke__(arg):
 					level += 1
 		elif level > 56 :
 			level -= 56
-			if level%6 == 0:
+			if level%8 == 0:
 				level = level*4+56
 			else:
 				level = (level-2)*4+58

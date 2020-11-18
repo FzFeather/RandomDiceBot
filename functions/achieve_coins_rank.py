@@ -20,14 +20,14 @@ def __invoke__(arg):
 					level = round(level/8*5)-1
 				else:
 					level = round(level/8*5)+level%8
-				elif level > 56 :
-					level -= 56
-					if level%6 == 0:
-						level = level/3+56
-					else:
-						level = (level-2)/3+58
-						print("你必須到達", level,"層",(i+1),"次")
-					else :
-						print("error")
-						if level <= 10:
-							break
+			elif level > 56 :
+				level -= 56
+				if level%6 == 0:
+					level = level/3+56
+				else:
+					level = (level-2)/3+58
+					print("你必須到達", level,"層",(i+1),"次")
+				else :
+					print("error")
+					if level <= 10:
+						break

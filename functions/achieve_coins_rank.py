@@ -11,12 +11,12 @@ def __invoke__(arg):
 	coins = int(Coinslevel[Rank-1])
 	for i in range(10):
 	   level = math.ceil(math.ceil(Numberofcoinneeded/coins)*40/(i+1))
-	   if level <= 60 :
+	   if level <= 35 :
 	      print("你必須到達", level, "層", (i+1),"次")
-	   elif level >= 61 :
-	      level = round((level - 60)/3 + 0.5) + 60
+	   elif level >= 36 :
+	      level = round((level - 35)/6 + 0.5) + 35
 	      print("你必須到達", level,"層",(i+1),"次")
 	   else :
 	      print("error")
-	   if level <= 30:
+	   if level <= 15:
 	      break

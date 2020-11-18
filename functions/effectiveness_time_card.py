@@ -1,11 +1,11 @@
-__arglist__ = {'1, 關卡數 = ?, 時間': 'x', '\n2, 卡片數量': 'card', '時間': 'time'}
+__arglist__ = {'2選1:(關數請寫1,卡片數請寫2)': 'x', '其數量': 'card', '時間': 'time'}
 
 def __invoke__(arg):
 	Time = float(arg["time"])
 	Card = int(arg["card"])
 	Choice = int(arg["x"])
-	if Choice==1 and Card>=60:
-	  Card = (Card-60)*3+60
+	if Choice==1 and Card>=36:
+	  Card = (Card-35)*6+35
 	Cardpertime = float(Card/Time)
 	print("平均每分鐘獲得的卡片數量 : ", Cardpertime)
 	if Cardpertime <= 4:

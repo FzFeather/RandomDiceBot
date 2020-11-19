@@ -89,7 +89,6 @@ async def load_func(name, arg, sender):
   if name in db.keys():
     funcname = db[name]['funcname']
   else:
-    await sender.send('程序不存在')
     return
   try:
     func = importlib.import_module('functions.'+funcname)

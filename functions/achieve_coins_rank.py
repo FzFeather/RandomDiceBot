@@ -31,11 +31,11 @@ def __invoke__(arg):
 		elif level > 56 :
 			level -= 56
 			k = 0
-			while k == 0;
+			while k == 0:
 				if level%8 == 0:
 					level = level/4+35
 					k = 1
-				elif (level-2)%8 == 0
+				elif (level-2)%8 == 0:
 					level = (level-2)/4+36
 					k = 1
 				else:

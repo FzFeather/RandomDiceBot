@@ -4,8 +4,11 @@ def __invoke__(arg):
 	Time = float(arg["time"])
 	Card = int(arg["card"])
 	Choice = int(arg["x"])
-	if Choice==1 and Card>=36:
-	  Card = (Card-35)*6+35
+	if Choice==1:
+		if Card <= 35:
+			Card = Card + Card // 5 * 2 + (Card+2) // 5
+		else:
+			Card = 56 + (Card-35) * 2 + (Card-35)//2 * 4
 	Cardpertime = float(Card/Time)
 	print("平均每分鐘獲得的卡片數量 : ", Cardpertime)
 	if Cardpertime <= 4:

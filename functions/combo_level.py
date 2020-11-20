@@ -10,7 +10,7 @@ def __invoke__(arg):
   damage = int(arg['damage'])
   in_game_level = int(arg['in_game_level'])
   combo = int(arg['combo'])
-  combo_power = combo*(combo-1)/2
+  combo_power = combo*(combo+1)/2
   # Subtract the effect of in_game_level and base attack
   damage -= 10 + combo_power * 8 +(combo_power + 10) * (in_game_level-1)
   level = 7 + damage / (combo_power * 2 + 10)

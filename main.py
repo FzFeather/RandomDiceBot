@@ -91,6 +91,19 @@ async def on_command(message):
     msg = await message.channel.send('目前為選項A')
     await msg.add_reaction('🅰️')
     await msg.add_reaction('🎴')
+  elif cmd_type.startswith('!speak'):
+    test = 732400260034330665
+    rddiscuss = 675570615767269377
+    channel = my_bot.get_channel(test)
+    if len(cmd_type) > 6:
+      suffix = cmd_type[6:]
+      if '-rddiscuss' in suffix:
+        channel = my_bot.get_channel(rddiscuss)
+    speech = content
+    if message.channel.recipient != None:
+      speech = message.channel.recipient.name + "："+ speech
+    await channel.send(speech)
+    
 
 async def call_helper(sender):
   help_embed = discord.Embed(title = '歡迎召喚小mmm的小Rd '+__icon__, colour = 0x7ca84a)

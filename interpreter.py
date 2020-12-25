@@ -151,7 +151,7 @@ async def load_func_by_emoji(emoji, sender, questioner_id, bot):
       try:
         func.__invoke__(arg)
       except (InputException, ValueError, KeyError):
-        error_msg = '輸入錯誤'+traceback.format_exc()
+        error_msg = '輸入錯誤'
         reply = await sender.send(error_msg)
       except:
         reply = await sender.send('Error:\n```\n'+trim_lines(traceback.format_exc(),(1,2))+'```')

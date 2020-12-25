@@ -14,7 +14,9 @@ def __invoke__(arg):
   # Subtract the effect of in_game_level and base attack
   damage -= 10 + combo_power * 8 +(combo_power + 10) * (in_game_level-1)
   level = 7 + damage / (combo_power * 2 + 10)
-  level_str = '{:.0f}'.format(level)
+  level_str = '{:.2f}'.format(level)
+  if level_str[-3:] == '.00':
+    level_str = level_str[:-3]
   if level < 7:
     print('組合等級為不合理數值['+level_str+']')
   else:

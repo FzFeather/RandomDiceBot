@@ -147,12 +147,14 @@ async def load_func_by_emoji(emoji, sender, questioner_id, bot):
           pass
       arg[func.__arglist__[a[0]]] = argvalue
     
+    err_msg = None
     with stdoutIO() as s:
       try:
         func.__invoke__(arg)
       except (InputException, ValueError, KeyError):
         error_msg = '輸入錯誤'
         reply = await sender.send(error_msg)
+        err_msg = traceback.format_exc()
       except:
         reply = await sender.send('Error:\n```\n'+trim_lines(traceback.format_exc(),(1,2))+'```')
       else:
@@ -160,7 +162,8 @@ async def load_func_by_emoji(emoji, sender, questioner_id, bot):
       finally:
         await reply.add_reaction(emoji)
         await reply.add_reaction('↩️')
-    
+    print(err_msg)
+
   except ImportError:
     await sender.send('程序不存在')
 

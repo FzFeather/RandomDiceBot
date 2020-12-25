@@ -15,6 +15,8 @@ __arglist__ = {'增益骰子描述':'buff_dscp'}
 ### V : Club Violet
 ### D : Default
 
+import re
+
 class Buff:
 
   def __init__(self):
@@ -31,10 +33,10 @@ class Buff:
     return total_buff
 
   def buff_value(self):
-    result = '己方速度增益: ' + str(self.self_speed_buff) + '%\t'
-    result += '對手速度增益: ' + str(self.opp_speed_buff) + '%\t'
-    result += '爆傷增益: ' + str(self.crit_buff) + '%\t'
-    result += '傷害增益: ' + str(self.dmg_buff) + '%\t'
+    result = '己方速度加乘: ' + str(self.self_speed_buff) + '%\t'
+    result += '對手速度加乘: ' + str(self.opp_speed_buff) + '%\t'
+    result += '爆傷加乘: ' + str(self.crit_buff) + '%\t'
+    result += '傷害加乘: ' + str(self.dmg_buff) + '%\t'
     return result
   
   def buff_multiple(self, crit_dmg):
@@ -53,7 +55,8 @@ class Buff:
     result = '速度增益倍率: {0:.2f}\t'.format(speed_mult)
     result += '爆擊增益倍率: {0:.2f}\t'.format(crit_mult)
     result += '傷害增益倍率: {0:.2f}\n'.format(dmg_mult)
-    result += '總增益倍率: {0:.2f}'.format(speed_mult * crit_mult * dmg_mult)
+    result += '總增益倍率: {0:.2f}[非太陽]\t'.format(speed_mult * crit_mult * dmg_mult)
+    result += '{0:.2f}[太陽]'.format(speed_mult ** 2 * crit_mult * dmg_mult)
     return result
 
 def time_buff_fn(level):
@@ -74,12 +77,19 @@ def moon_buff_fn(level, enabled = True):
     return buff
   return moon_buff
 
+def crit_buff_fn(level):
+  def crit_buff(pips):
+    buff = Buff()
+    buff.crit_buff = (8 + 0.2 * (level-3)) * pips + 1 * 4
+    return buff
+  return crit_buff
+
 def __invoke__(arg):
-  heading, content =  arg['buff_dscp'].split(':')
-  crit_dmg, lvls = heading.split(';')
+  crit_dmg, lvls, content =  arg['buff_dscp'].split('|')
   levels = {}
-  for l in lvls.split('+'):
-    levels[l[:-1]] = int(l[-1])
+  for l in lvls.split(';'):
+    dice, level = re.findall(r'(\w+?)(\d+)', l)[0]
+    levels[dice] = int(level)
 
   buff_fn = {}
   if 'M' in levels:
@@ -87,6 +97,8 @@ def __invoke__(arg):
     buff_fn['Md'] = moon_buff_fn(levels['M'], False)
   if 'T' in levels:
     buff_fn['T'] = time_buff_fn(levels['T'])
+  if 'C' in levels:
+    buff_fn['C'] = crit_buff_fn(levels['C'])
 
   buffs = content.split('+')
   all_buffs = Buff()
@@ -102,5 +114,6 @@ def __invoke__(arg):
       value = int(b[-1])
       buff = buff_fn[name](value)
     all_buffs = all_buffs + buff
+  print('（數字僅供參考）')
   print(all_buffs.buff_value())
   print(all_buffs.buff_multiple(int(crit_dmg)))

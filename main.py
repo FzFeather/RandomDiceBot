@@ -6,7 +6,12 @@ from interpreter import *
 from keep_alive import keep_alive
 import random
 
-my_bot = Bot(command_prefix=('!', '?'))
+intents = discord.Intents(messages=True, guilds=True)
+intents.reactions = True
+intents.members = True
+intents.typing = False
+intents.presences = False
+my_bot = Bot(command_prefix=('!', '?'), intents=intents)
 
 __icon__ = '<:733931336175321119:766154394949255219>'
 
@@ -39,6 +44,23 @@ async def on_reaction_add(reaction, user):
   else:
     await load_func_by_emoji(str(reaction.emoji), reaction.message.channel, user.id, my_bot)
   # await reaction.message.edit(content=str(reaction.emoji))
+
+
+@my_bot.event
+async def on_raw_reaction_add(event):
+  if event.message_id == 805739237336416317 and event.emoji.id == 697729060926783498:
+    guild = my_bot.get_guild(event.guild_id)
+    member = guild.get_member(event.user_id)
+    role = guild.get_role(805479746347073566)
+    await member.add_roles(role)
+
+@my_bot.event
+async def on_raw_reaction_remove(event):
+  if event.message_id == 805739237336416317 and event.emoji.id == 697729060926783498:
+    guild = my_bot.get_guild(event.guild_id)
+    member = guild.get_member(event.user_id)
+    role = guild.get_role(805479746347073566)
+    await member.remove_roles(role)
 
 async def on_command(message):
   sender = message.channel
@@ -106,7 +128,7 @@ async def on_command(message):
     
 
 async def call_helper(sender):
-  help_embed = discord.Embed(title = '歡迎召喚小mmm的小Rd '+__icon__, colour = 0x7ca84a)
+  help_embed = discord.Embed(title = '小Rd '+__icon__+' 聽到你的呼喚來了哦', colour = 0x7ca84a)
   help_embed.add_field(name='技能', value=list_query())
   help_embed.set_thumbnail(url='https://cdn.discordapp.com/emojis/766154394949255219.png?v=1')
   help_embed.set_footer(text = 'by @FzFeather#1154, @小mmm#2411')
